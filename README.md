@@ -1,3 +1,3 @@
-# Phoenix app release branch
+# Phoenix app dev branch
 
-Phoenix real estate app for renting (stable release).
+The development branch for the application. May not be stable.
