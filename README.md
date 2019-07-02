@@ -1,16 +1,34 @@
-# phoenix
+# Phoenix it solutions
 
-Phoenix real estate app for renting
+## Application
+A client app for phoenix real estate (renting).
+### Features
 
-## Getting Started
+* Tutorials for home
+* Servives & booking
+* Recommended restaurants and link to trid advisor
+* List of Villa Padierna services
+* Suggested activities in the region
+* Feedback form with notification push up
+* Bug reporting
 
-This project is a starting point for a Flutter application.
+### Installation
 
-A few resources to get you started if this is your first Flutter project:
+**Dev**
+1. Go in your Android settings and enable external source for applications installation
+2. Download the .apk in the app folder on your device.
+3. Click on it to install the dev. app
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+**Android**
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+TODO
+
+**IOS**
+
+TODO
+
+
+
+## Website
+
+**TODO**
