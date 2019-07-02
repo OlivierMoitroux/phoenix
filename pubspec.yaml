@@ -24,9 +24,48 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  # Shared preferences to store settings variables
+  shared_preferences: ^0.4.3
+
+  # Package to store data on storage device
+  path_provider: ^0.4.1
+
+  # Package to convert easily class variables to json
+  json_annotation: ^2.0.0
+
+  # Package for web communication
+  http: ^0.11.0
+
+  # Package to render html page in Flutter
+  flutter_html: ^0.8.2
+
+  # Use secured storage
+  flutter_secure_storage: ^3.2.1+1
+
+  # Use tuples
+  tuple: ^1.0.2
+
+  # Distance between points, smoothing of trajectories
+  latlong: ^0.6.1
+
+  validators: ^1.0.0+1
+
+  # Check wifi or cellular connection
+  connectivity: ^0.4.2
+
+  # Launch browser to open privacy policy
+  url_launcher: ^5.0.1
+
+  # Package for text auto-resizing
+  auto_size_text: ^1.1.2
+
+  # Sticky Header list for Flutter
+  sticky_header_list: ^1.0.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable: ^2.0.0
 
 
 # For information on the generic Dart part of this file, see the
