@@ -279,8 +279,8 @@ class _LoginPageState extends State<LoginPage> {
 
     return new Scaffold(
         appBar: new AppBar(
-          backgroundColor: covoitULiegeColor,
-          title: new Text('Login to Covoit ULiège Dev.'),
+          backgroundColor: mainColor,
+          title: new Text('Login to phoenix'),
         ),
         body: _buildBody()
     );

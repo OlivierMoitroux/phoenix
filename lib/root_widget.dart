@@ -10,7 +10,7 @@ import 'package:phoenix/screens/home/home.dart';
 ///                         *************
 /// --------------------------------------------------------------------------
 
-final Map<String, dynamic> DEFAULT_CONFIG = {"Example":1};
+//final Map<String, dynamic> DEFAULT_CONFIG = {"Example":1};
 
 
 /// --------------------------------------------------------------------------
@@ -42,7 +42,7 @@ class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.notLoggedIn;
 
 
-  Map<String, dynamic> CONFIG;
+//  Map<String, dynamic> CONFIG;
 
 
   _RootPageState();
@@ -61,18 +61,18 @@ class _RootPageState extends State<RootPage> {
   /// Call this when you get the callback of login_page and user signed in
   void _signedIn() async{
 
-    // Get remote configuration of the app from the server
-    ServerReply configReply = await NetworkUtilsSingleton.getInstance().getInitConfig();
-    if (configReply.isSuccess()) {
-      CONFIG = json.decode(configReply.content);
-    }
-    else{
-      CONFIG = DEFAULT_CONFIG;
-      print("Error downloading config from server -> default set\n\n${configReply.content}");
-    }
+//    // Get remote configuration of the app from the server
+//    ServerReply configReply = await NetworkUtilsSingleton.getInstance().getInitConfig();
+//    if (configReply.isSuccess()) {
+//      CONFIG = json.decode(configReply.content);
+//    }
+//    else{
+//      CONFIG = DEFAULT_CONFIG;
+//      print("Error downloading config from server -> default set\n\n${configReply.content}");
+//    }
 
 
-    await _fetchRemoteData();
+//    await _fetchRemoteData();
 
     setState((){
       print("[root_page] Root to home");

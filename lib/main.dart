@@ -19,14 +19,19 @@ class PhoenixApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Phoenix RE',
+      title: 'Phoenix rental',
       home: new RootPage(),
       theme: ThemeData(
-        backgroundColor: myColors.covoitULiegeColor,
+        backgroundColor: myColors.mainColor,
+        accentColor: Colors.cyan[600],
+
         textTheme: TextTheme(
-            body1: TextStyle(color: Colors.black54)
+            title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic, color: Colors.black54),
+            headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold, color: Colors.black54),
+            body1: TextStyle(fontSize: 14.0, color: Colors.black54),
+
         ),
-        buttonColor: myColors.covoitULiegeColor,
+        buttonColor: myColors.mainColor,
         dividerColor: Colors.black54,
 
       ),
