@@ -23,6 +23,11 @@
 * **Home/End**: go to begin/end of line
 * **ctrl + home/end**: go to begin/end of file
 
+## Git
+* **ctrl + k**: commit
+* **ctrl + maj + k**: push
+* **ctrl + t**: update project
+
 ## Browser
 * **ctrl + shift + t**: open previously closed tab in browser
 
