@@ -279,7 +279,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return new Scaffold(
         appBar: new AppBar(
-          backgroundColor: mainColor,
+          backgroundColor: orange1,
           title: new Text('Login to phoenix'),
         ),
         body: _buildBody()

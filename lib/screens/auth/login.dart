@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2019 Olivier Moitroux - All Rights Reserved
+ *
+ * Unauthorized copying/distribution of this file, via any medium is strictly
+ * prohibited without the express permission of Olivier Moitroux.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:phoenix/utils/colors.dart';
 import 'package:phoenix/utils/alert_box.dart';
@@ -40,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
   login_model.LoginData _data = new login_model.LoginData.empty();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   LoginButtonState _loginButtonState;
+
   final int MIN_PASSWORD_LENGTH = 4;
 
   // Called before build
@@ -158,7 +166,8 @@ class _LoginPageState extends State<LoginPage> {
    *                                UI
    *   ------------------------------------------------------------- */
   Widget _buildBody() {
-    final username = TextFormField(
+
+    final _username = TextFormField(
       keyboardType: TextInputType.text,
       // .emailAddress
       autofocus: false,
@@ -168,12 +177,13 @@ class _LoginPageState extends State<LoginPage> {
       },
       decoration: InputDecoration(
         hintText: 'Username',
-        labelText: 'Username',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
     );
 
     /// Form input for password
-    final password = TextFormField(
+    final _password = TextFormField(
       autofocus: false,
       obscureText: true,
       validator: this._validatePassword,
@@ -181,8 +191,9 @@ class _LoginPageState extends State<LoginPage> {
         this._data.password = generateMd5(inputUsr);
       },
       decoration: InputDecoration(
-        hintText: 'Password',
-        labelText: 'Password',
+        hintText: 'Activation code',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
     );
 
@@ -209,8 +220,8 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     /// Log in button
-    final logInButton = RaisedButton(
-      color: covoitULiegeColor,
+    final _logInButton = RaisedButton(
+      //color: Theme.of(context).backgroundColor,
       padding: EdgeInsets.symmetric(vertical: 12.0),
       shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(30.0)),
@@ -220,31 +231,6 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
-
-    /// Clickable text
-    final forgotPswd = new Row(
-      // To make the text on the right
-        textDirection: TextDirection.rtl, // or ltl
-        children: <Widget>[
-          new InkWell(
-              child: new Text('Forgot your password ?',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black54)),
-              onTap: () => showDialogBox(
-                  context, "Oups ... ", "This feature is not yeat implemented")
-          )
-        ]);
-
-    /// Clickable text
-    final signUp = new Center(
-        child: new InkWell(
-            child: new Text('Don\'t have an account yet ? Sign Up !',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.black54)),
-            onTap: () {
-              print("Sign up clicked");
-              Navigator.pushNamed(context, '/register_page');
-            }));
 
     return new Center(
       child: new Form(
@@ -256,17 +242,12 @@ class _LoginPageState extends State<LoginPage> {
             new Icon(Icons.account_circle,
                 size: 120.0, color: Colors.black54),
             SizedBox(height: 24.0),
-            username,
+            _username,
             SizedBox(height: 16.0),
-            password,
-            SizedBox(height: 16.0),
-            forgotPswd,
+            _password,
             SizedBox(height: 48.0),
-            logInButton,
+            _logInButton,
             SizedBox(height: 16.0),
-
-            signUp,
-            SizedBox(height: 24.0),
           ],
         ),
       ),
@@ -279,7 +260,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return new Scaffold(
         appBar: new AppBar(
-          backgroundColor: mainColor,
+
           title: new Text('Login to phoenix'),
         ),
         body: _buildBody()

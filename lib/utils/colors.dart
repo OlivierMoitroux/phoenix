@@ -19,6 +19,11 @@ const MaterialColor covoitULiegeColor = const MaterialColor(
 
 // Conversion rule example: #FF701C -> 0xFFFF701C
 
-Color mainColor = Color(0xFFFF701C);
-Color firstColor = Color(0xFFF47D15);
-Color secondColor = Color(0xFFEF772C);
+Color orange1 = Color(0xFFFF701C);
+Color orange2 = Color(0xFFF47D15);
+Color orange3 = Color(0xFFEF772C);
+
+Color myGrey1 = Color(0xFF323234);
+Color myGrey2 = Color(0xFF1B2734);
+Color myGrey3 = Color(0xFF122031);
+Color dark = Color(0xFF414149);
