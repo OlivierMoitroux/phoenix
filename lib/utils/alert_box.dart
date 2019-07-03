@@ -18,7 +18,7 @@ void showDialogBox(BuildContext context, String title, String content) {
           new FlatButton(
             child: new Text("Close",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, color: covoitULiegeColor)),
+                    fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -47,7 +47,7 @@ void showScrollableDialogBox(BuildContext context, String title, String content)
         actions: <Widget>[
           FlatButton(
             child: Text('Close', style: TextStyle(
-                fontWeight: FontWeight.bold, color: covoitULiegeColor)),
+                fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -96,7 +96,7 @@ class ConfirmAlertBoxState extends State<ConfirmAlertBox> {
             new FlatButton(
               child: new Text("Close",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: covoitULiegeColor)),
+                      fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -104,7 +104,7 @@ class ConfirmAlertBoxState extends State<ConfirmAlertBox> {
             new FlatButton(
               child: new Text("Accept",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: covoitULiegeColor)),
+                      fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
               onPressed: () {
                 onAccept();
                 Navigator.of(context).pop();

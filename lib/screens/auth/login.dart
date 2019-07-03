@@ -167,40 +167,60 @@ class _LoginPageState extends State<LoginPage> {
    *   ------------------------------------------------------------- */
   Widget _buildBody() {
 
+    final _logo = Hero(
+      tag: 'hero',
+      child: CircleAvatar(
+        backgroundColor: Colors.transparent,
+        radius: 68.0,
+        child: Image.asset('assets/logos/phoenix_long.png'),
+      ),
+    );
+
     final _username = TextFormField(
       keyboardType: TextInputType.text,
-      // .emailAddress
+      style: TextStyle(
+        color: Colors.white,
+      ),
       autofocus: false,
+      autocorrect: false,
       validator: this._validateUsername,
       onSaved: (String inputUsr) {
         this._data.username = inputUsr;
       },
       decoration: InputDecoration(
+        icon: Icon(Icons.account_circle, color: Colors.white, size: 45,),
         hintText: 'Username',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+//        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+//        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
     );
 
     /// Form input for password
     final _password = TextFormField(
+
+      style: TextStyle(
+        color: Colors.white,
+      ),
+
       autofocus: false,
       obscureText: true,
+      autocorrect: false,
       validator: this._validatePassword,
       onSaved: (String inputUsr) {
         this._data.password = generateMd5(inputUsr);
       },
       decoration: InputDecoration(
+        icon: Icon(Icons.lock, color: Colors.white, size: 45,),
         hintText: 'Activation code',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+//        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+//        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
     );
 
     Widget _setUpLogInButtonChild() {
       if (_loginButtonState == LoginButtonState.standard) {
         return new Text(
-          'Login',
+          'Activate',
           style: TextStyle(
             color: Colors.white,
             fontSize: 24.0,
@@ -215,7 +235,7 @@ class _LoginPageState extends State<LoginPage> {
         return Icon(Icons.check, color: Colors.white);
       }
       else {
-        return Icon(Icons.close, color: Colors.red);
+        return Icon(Icons.close, color: Colors.white);
       }
     }
 
@@ -236,15 +256,28 @@ class _LoginPageState extends State<LoginPage> {
       child: new Form(
         key: this._formKey,
         child: new ListView(
-          padding: EdgeInsets.only(top: 60.0, left: 24.0, right: 24.0),
+          padding: EdgeInsets.only(top: 90.0, left: 24.0, right: 24.0),
           children: <Widget>[
             // picture,
-            new Icon(Icons.account_circle,
-                size: 120.0, color: Colors.black54),
-            SizedBox(height: 24.0),
+            _logo,
+            SizedBox(height: 100.0),
             _username,
             SizedBox(height: 16.0),
             _password,
+            SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.info_outline, size: 20.0, color: Colors.white),
+                SizedBox(width: 5,),
+                new Container (
+////                  padding: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+                  width: 180,
+                  child: Text("You can find your activation code in your welcome pack.", style: Theme.of(context).textTheme.body1.merge(TextStyle(color: Colors.white70),)),
+                ),
+              ],
+            ),
+
             SizedBox(height: 48.0),
             _logInButton,
             SizedBox(height: 16.0),
@@ -259,11 +292,13 @@ class _LoginPageState extends State<LoginPage> {
     /// Form input for username
 
     return new Scaffold(
-        appBar: new AppBar(
+//        appBar: new AppBar(
+//
+//          title: new Text('Login to phoenix'),
+//        ),
+        body: _buildBody(),
+      backgroundColor: Theme.of(context).primaryColorDark,
 
-          title: new Text('Login to phoenix'),
-        ),
-        body: _buildBody()
     );
   }
 }
