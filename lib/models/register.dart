@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 part 'register.g.dart';
 
 /// A model class to represent the data of the signup form with serialization support

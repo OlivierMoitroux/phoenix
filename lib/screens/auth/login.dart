@@ -19,21 +19,18 @@ import 'package:crypto/crypto.dart';
  *                               Utils
  * ======================================================================= */
 /// An enumeration for the submit button state (UI animation)
-enum LoginButtonState {
-  standard, inProgress, valid, notValid
-}
+enum LoginButtonState { standard, inProgress, valid, notValid }
+
 /// Hash password to enhance security (limit data leakage)
 String generateMd5(String input) {
   return md5.convert(utf8.encode(input)).toString();
 }
-
 
 /* ======================================================================= *
  *                          Login Page
  * ======================================================================= */
 /// First screen seen by the user when opening the app. Login page.
 class LoginPage extends StatefulWidget {
-
   LoginPage({this.onSignedIn});
 
   // A callback to return status to root_page
@@ -48,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   LoginButtonState _loginButtonState;
 
-  final int MIN_PASSWORD_LENGTH = 4;
+  final int MIN_KEY_LENGTH = 4;
 
   // Called before build
   @override
@@ -61,16 +58,18 @@ class _LoginPageState extends State<LoginPage> {
   /*   ------------------------------------------------------------- *
    *                           Validators
    *   ------------------------------------------------------------- */
-  String _validatePassword(String pswd) {
-    if (pswd.length < MIN_PASSWORD_LENGTH) {
-      return 'The Password must be at least 4 characters.';
+  String _validateKey(String key) {
+    if (key.length < MIN_KEY_LENGTH) {
+      return 'The activation key must be at least ' +
+          MIN_KEY_LENGTH.toString() +
+          ' characters.';
     }
     return null;
   }
 
   String _validateUsername(String usr) {
     if (usr.length < 1) {
-      return 'Please enter your username !';
+      return 'Please enter a username.';
     }
     return null;
   }
@@ -80,23 +79,21 @@ class _LoginPageState extends State<LoginPage> {
    *   ------------------------------------------------------------- */
   /// Display a little spinner instead of the "log in" message to notify user that app is querying server
   void animateLogInButton() {
-
     setState(() {
       _loginButtonState = LoginButtonState.inProgress;
-
     });
   }
 
   /// Display in a visual manner the success of a server query
   void displayStateLogInButton(bool success) {
     setState(() {
-      _loginButtonState = success?LoginButtonState.valid:LoginButtonState.notValid;
+      _loginButtonState =
+          success ? LoginButtonState.valid : LoginButtonState.notValid;
     });
-
   }
 
   /// Reset the login button to the message "log in"
-  resetStateLogInButton(){
+  resetStateLogInButton() {
     setState(() {
       _loginButtonState = LoginButtonState.standard;
     });
@@ -106,7 +103,6 @@ class _LoginPageState extends State<LoginPage> {
   void submit(context) async {
     // Check user inputs are valid and save the form
     if (this._formKey.currentState.validate()) {
-
       try {
         _formKey.currentState.save();
 
@@ -118,18 +114,17 @@ class _LoginPageState extends State<LoginPage> {
         if (!isConnected) {
           showDialogBox(context, "No internet connection available.",
               "Please turn on wifi or cellular network in your settings.");
-        }
-        else {
+        } else {
           // Query server
-          ServerReply reply = await NetworkUtilsSingleton.getInstance().logIn(
-              _data.username, _data.password);
+          ServerReply reply = await NetworkUtilsSingleton.getInstance()
+              .logIn(_data.username, _data.password);
 
           if (reply.isSuccess()) {
             print("[Login] ${json.encode(_data)}");
 
             // Store login data (session) to secured storage, for later queries
-            await SecuredStorageSingleton.getInstance().write(
-                key: "session", value: json.encode(_data));
+            await SecuredStorageSingleton.getInstance()
+                .write(key: "session", value: json.encode(_data));
 
             displayStateLogInButton(reply.isSuccess());
 
@@ -148,14 +143,11 @@ class _LoginPageState extends State<LoginPage> {
             // Wait a little bit so that user has time to see
             await new Future.delayed(new Duration(seconds: 1));
             resetStateLogInButton();
-
           }
         }
-      }
-      catch (e){
+      } catch (e) {
         resetStateLogInButton();
-        showDialogBox(
-            context, "Error logging in", "Please try again or later");
+        showDialogBox(context, "Error logging in", "Please try again or later");
         print(e.toString());
       }
       resetStateLogInButton();
@@ -166,7 +158,6 @@ class _LoginPageState extends State<LoginPage> {
    *                                UI
    *   ------------------------------------------------------------- */
   Widget _buildBody() {
-
     final _logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
@@ -188,8 +179,12 @@ class _LoginPageState extends State<LoginPage> {
         this._data.username = inputUsr;
       },
       decoration: InputDecoration(
-        icon: Icon(Icons.account_circle, color: Colors.white, size: 45,),
-        hintText: 'Username',
+        icon: Icon(
+          Icons.account_circle,
+          color: Colors.white,
+          size: 45,
+        ),
+        hintText: 'Enter a username',
 //        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
 //        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
@@ -197,21 +192,23 @@ class _LoginPageState extends State<LoginPage> {
 
     /// Form input for password
     final _password = TextFormField(
-
       style: TextStyle(
         color: Colors.white,
       ),
-
       autofocus: false,
       obscureText: true,
       autocorrect: false,
-      validator: this._validatePassword,
+      validator: this._validateKey,
       onSaved: (String inputUsr) {
         this._data.password = generateMd5(inputUsr);
       },
       decoration: InputDecoration(
-        icon: Icon(Icons.lock, color: Colors.white, size: 45,),
-        hintText: 'Activation code',
+        icon: Icon(
+          Icons.lock,
+          color: Colors.white,
+          size: 45,
+        ),
+        hintText: 'Enter your activation code',
 //        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
 //        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
@@ -226,15 +223,13 @@ class _LoginPageState extends State<LoginPage> {
             fontSize: 24.0,
           ),
         );
-      }
-      else if (_loginButtonState == LoginButtonState.inProgress) {
+      } else if (_loginButtonState == LoginButtonState.inProgress) {
         return CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
         );
       } else if (_loginButtonState == LoginButtonState.valid) {
         return Icon(Icons.check, color: Colors.white);
-      }
-      else {
+      } else {
         return Icon(Icons.close, color: Colors.white);
       }
     }
@@ -250,7 +245,6 @@ class _LoginPageState extends State<LoginPage> {
         this.submit(context);
       },
     );
-
 
     return new Center(
       child: new Form(
@@ -269,11 +263,17 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Icon(Icons.info_outline, size: 20.0, color: Colors.white),
-                SizedBox(width: 5,),
-                new Container (
+                SizedBox(
+                  width: 5,
+                ),
+                new Container(
 ////                  padding: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
                   width: 180,
-                  child: Text("You can find your activation code in your welcome pack.", style: Theme.of(context).textTheme.body1.merge(TextStyle(color: Colors.white70),)),
+                  child: Text(
+                      "You can find your activation code in your welcome pack.",
+                      style: Theme.of(context).textTheme.body1.merge(
+                            TextStyle(color: Colors.white70),
+                          )),
                 ),
               ],
             ),
@@ -296,9 +296,8 @@ class _LoginPageState extends State<LoginPage> {
 //
 //          title: new Text('Login to phoenix'),
 //        ),
-        body: _buildBody(),
+      body: _buildBody(),
       backgroundColor: Theme.of(context).primaryColorDark,
-
     );
   }
 }
