@@ -62,11 +62,27 @@ dependencies:
   # Sticky Header list for Flutter
   sticky_header_list: ^1.0.6
 
+  # Introduction slider
+  intro_slider: ^2.2.5
+
+  image: "^2.1.0"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # Automatic serialization support
   json_serializable: ^2.0.0
-#  flutter_launcher_icons: ^0.7.2
+
+  # Automatic app launcher configurator
+  flutter_launcher_icons: ^0.7.2
+
+# Define the launch icon, use >> flutter pub pub run flutter_launcher_icons:main
+flutter_icons:
+  android: true
+  ios: true
+  adaptive_icon_background: "#323234" # only available for Android 8.0 devices and above
+#  adaptive_icon_foreground: "path_to_asset" # only available for Android 8.0 devices and above, no hexa clr
+  image_path: "assets/icons/icon_phoenix.png"
 
 
 # For information on the generic Dart part of this file, see the
@@ -82,6 +98,9 @@ flutter:
 
   assets:
     - assets/logos/phoenix_long.png
+    - assets/images/photo_eraser.png
+    - assets/images/photo_pencil.png
+    - assets/images/photo_ruler.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

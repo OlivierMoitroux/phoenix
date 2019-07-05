@@ -4,6 +4,7 @@ import 'package:phoenix/network/network_utils.dart';
 import 'package:phoenix/store/secured_storage.dart';
 import 'package:phoenix/screens/auth/login.dart';
 import 'package:phoenix/screens/home/home.dart';
+import 'package:phoenix/screens/intro/intro_sliders.dart';
 
 /// --------------------------------------------------------------------------
 ///                         Configuration
@@ -108,13 +109,14 @@ class _RootPageState extends State<RootPage> {
     switch(authStatus){
       case AuthStatus.notLoggedIn:
       // Go to login then
-        return new LoginPage(
-          onSignedIn: _signedIn,
-        );
+//        return new LoginPage(
+//          onSignedIn: _signedIn,
+//        );
+        return new IntroScreen(onSignedIn: _signedIn);
       case AuthStatus.loggedIn:
       // Go to home then
         return new HomeScreen(
-          //onSignedOut: _signedOut,
+          title: "Home",
         );
     }
     return new LoginPage();

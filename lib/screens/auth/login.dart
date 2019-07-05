@@ -138,11 +138,12 @@ class _LoginPageState extends State<LoginPage> {
           } else {
             // Wrong id or password
             displayStateLogInButton(reply.isSuccess());
-            showDialogBox(context, reply.content, "Please try again");
+//            showDialogBox(context, reply.content, "Please try again");
 
             // Wait a little bit so that user has time to see
-            await new Future.delayed(new Duration(seconds: 1));
-            resetStateLogInButton();
+//            await new Future.delayed(new Duration(seconds: 1));
+//            resetStateLogInButton();
+              widget.onSignedIn();
           }
         }
       } catch (e) {

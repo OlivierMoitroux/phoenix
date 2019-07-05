@@ -105,7 +105,7 @@ abstract class BaseNetworkUtils {
   ///         occured
   Future<ServerReply> deleteAccount();
 
-  /// Download the user data from server (account infos + habits)
+  /// Download the user data from server (account intro + habits)
   /// @return <success, content> where content is the error string if an error
   ///         occured, a raw json otherwise
   Future<ServerReply> downloadUserData();
