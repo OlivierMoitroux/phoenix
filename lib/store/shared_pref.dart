@@ -3,7 +3,7 @@ import 'dart:async';
 
 /// Utility to get access to settings value, stored in persistent memory via shared preference. <br>
 /// Warning: do not used for sensitive data
-class Settings {
+class SharedPref {
   /// Store variables in shared preference (not secured so for non-sensitive data)
   static Future<bool> getSwitchValue(String key, bool defaultValue) async {
     final SharedPreferences settings = await SharedPreferences.getInstance();

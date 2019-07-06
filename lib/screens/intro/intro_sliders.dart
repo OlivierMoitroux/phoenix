@@ -38,25 +38,28 @@ class IntroScreenState extends State<IntroScreen> {
     slides.add(
       new Slide(
         title: "Welcome home !",
-        description: "This application is designed to help you enjoy the most your stay in Marbella.",
-        pathImage: "assets/images/photo_eraser.png",
+        maxLineTitle: 2,
+        description: "This application is your new companion and is designed to help you enjoy the most your stay in Marbella.",
+        pathImage: "assets/icons/home-interface.png",
         backgroundColor: myColors.dark,
       ),
     );
     slides.add(
       new Slide(
-        title: "How can I use this app ?",
-        description: "Features include list of tutorials and services, recommended restaurants and activities in the region.",
-        pathImage: "assets/images/photo_pencil.png",
+        title: "How can you use this app ?",
+        maxLineTitle: 2,
+        description: "Features include \n - Tutorials about home appliances\n - List of services\n - Recommended restaurants\n - Recommended activities in the region.",
+        pathImage: "assets/icons/puzzle.png",
         backgroundColor: myColors.dark,
       ),
     );
     slides.add(
       new Slide(
-        title: "Let's activate your access rights !",
+        title: "Let's activate your access !",
+        maxLineTitle: 2,
         description:
-        "You will be asked to enter a username as well as the activation code you can find in your welcome pack.",
-        pathImage: "assets/images/photo_ruler.png",
+        "You will be asked to enter your access information (which you can find in your welcome pack).",
+        pathImage: "assets/icons/rocket.png",
         backgroundColor: myColors.dark,
       ),
     );
@@ -82,6 +85,9 @@ class IntroScreenState extends State<IntroScreen> {
     if (dispSlides){
       return new IntroSlider(
         slides: this.slides,
+        styleNameSkipBtn: TextStyle(color: myColors.orange3),
+        styleNameDoneBtn: TextStyle(color: myColors.orange3),
+        colorActiveDot: myColors.orange3,
         onDonePress: this.onDonePress,
       );
     }

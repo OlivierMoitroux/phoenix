@@ -101,6 +101,9 @@ flutter:
     - assets/images/photo_eraser.png
     - assets/images/photo_pencil.png
     - assets/images/photo_ruler.png
+    - assets/icons/home-interface.png
+    - assets/icons/puzzle.png
+    - assets/icons/rocket.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

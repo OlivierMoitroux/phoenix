@@ -5,6 +5,8 @@ import 'package:phoenix/store/secured_storage.dart';
 import 'package:phoenix/screens/auth/login.dart';
 import 'package:phoenix/screens/home/home.dart';
 import 'package:phoenix/screens/intro/intro_sliders.dart';
+import 'package:phoenix/store/shared_pref.dart';
+import 'dart:async';
 
 /// --------------------------------------------------------------------------
 ///                         Configuration
@@ -29,9 +31,10 @@ class RootPage extends StatefulWidget{
 }
 
 /// Used to root to home or login according to the user status
-enum AuthStatus{
-  notLoggedIn,
-  loggedIn
+enum ActivationStatus{
+  notActivated,
+  activated,
+  notYetKnown
 }
 
 /// Most important widget of the app. It is initialized by main().
@@ -40,23 +43,34 @@ enum AuthStatus{
 class _RootPageState extends State<RootPage> {
 
   // By default, the app root to the login form.
-  AuthStatus authStatus = AuthStatus.notLoggedIn;
+  ActivationStatus authStatus = ActivationStatus.notYetKnown;
 
 
 //  Map<String, dynamic> CONFIG;
 
 
-  _RootPageState();
-
   @override
   void initState(){
     super.initState();
-    setState(() {
-      // If we want to make the connect persistent, change this, so that it does not return
-      // always false but check session in memory with a token with limitied lifetime
-      // (expiration associated with possibility to extend it if app is still being used)
-      authStatus = NetworkUtilsSingleton.getInstance().isLoggedIn()?AuthStatus.loggedIn:AuthStatus.notLoggedIn;
+
+    SharedPref.getSwitchValue("appActivated", false).then((bool appActivated){
+      print("App is activated ? $appActivated");
+      if (appActivated){
+        setState(() {
+          authStatus = ActivationStatus.activated;
+        });
+      }
+      else{
+        setState(() {
+          authStatus = ActivationStatus.notActivated;
+        });
+      }
     });
+
+    // If we want to make the connect persistent, change this, so that it does not return
+    // always false but check session in memory with a token with limitied lifetime
+    // (expiration associated with possibility to extend it if app is still being used)
+    // authStatus = NetworkUtilsSingleton.getInstance().isLoggedIn()?AuthStatus.loggedIn:AuthStatus.notLoggedIn;
   }
 
   /// Call this when you get the callback of login_page and user signed in
@@ -77,7 +91,10 @@ class _RootPageState extends State<RootPage> {
 
     setState((){
       print("[root_page] Root to home");
-      authStatus = AuthStatus.loggedIn;
+      SharedPref.setSwitchValue("appActivated", true).then((bool ret){
+        print("Write appActivated to sp: $ret");
+      });
+      authStatus = ActivationStatus.activated;
     });
   }
 
@@ -85,7 +102,7 @@ class _RootPageState extends State<RootPage> {
     NetworkUtilsSingleton.getInstance().logout();
     SecuredStorageSingleton.getInstance().deleteAll();
     setState((){
-      authStatus = AuthStatus.notLoggedIn;
+      authStatus = ActivationStatus.notActivated;
     });
   }
 
@@ -106,15 +123,15 @@ class _RootPageState extends State<RootPage> {
   /// --------------------------------------------------------------------------
   @override
   Widget build(BuildContext context){
+    print("Building root widget with login = ${(authStatus == ActivationStatus.activated)?"true":"false"}");
     switch(authStatus){
-      case AuthStatus.notLoggedIn:
-      // Go to login then
-//        return new LoginPage(
-//          onSignedIn: _signedIn,
-//        );
+      case ActivationStatus.notYetKnown:
+        return new Container(); // To avoid directly root to sliders then receiving the future that updates this widget that is no more active.
+
+      case ActivationStatus.notActivated:
         return new IntroScreen(onSignedIn: _signedIn);
-      case AuthStatus.loggedIn:
-      // Go to home then
+
+      case ActivationStatus.activated:
         return new HomeScreen(
           title: "Home",
         );

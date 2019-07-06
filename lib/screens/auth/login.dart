@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
 
   String _validateUsername(String usr) {
     if (usr.length < 1) {
-      return 'Please enter a username.';
+      return 'Please enter your username.';
     }
     return null;
   }
@@ -269,9 +269,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 new Container(
 ////                  padding: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
-                  width: 180,
+                  width: 200,
                   child: Text(
-                      "You can find your activation code in your welcome pack.",
+                      "You can find your activation access in your welcome pack.",
                       style: Theme.of(context).textTheme.body1.merge(
                             TextStyle(color: Colors.white70),
                           )),
