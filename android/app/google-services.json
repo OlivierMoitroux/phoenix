@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "514027155930",
+    "firebase_url": "https://phoenix-app-40250.firebaseio.com",
+    "project_id": "phoenix-app-40250",
+    "storage_bucket": "phoenix-app-40250.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514027155930:android:77bd83a514441dcd",
+        "android_client_info": {
+          "package_name": "moitroux.phoenix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514027155930-lctg7f0ubtdqa234969pg5rfs7o5l7fo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZkxSZfk0gq4JOyOWG0xATfhMvsbCPujE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514027155930-lctg7f0ubtdqa234969pg5rfs7o5l7fo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
